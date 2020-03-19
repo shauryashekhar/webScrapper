@@ -1,15 +1,19 @@
-# webScrapper
-WebScraping project for Independent Study at UW Madison - Spring 2020
-| Name          | Link | OS  | Language |Number of Serach Term  | Issue Faced |Completed|Number of Apps Retreived|
+# Web Scraping Project
+
+Web Scraping project for Independent Study (under Prof. Rahul Chatterjee) at UW Madison - Spring 2020
+
+Base Unique Search Terms - 1557
+
+| Name          | Link | OS  | Language |Number of Queries  | Issue Faced |Completed|Number of Apps Retreived|
 | --------------| ---- | --- | ---------|-----------------------|-------------|---------|------------------------|
-|Apkcombo| https://apkcombo.com|Android|English, Arabic, Spanish & More||Blocking due to cloudflare||
+|Apkcombo| https://apkcombo.com|Android|English, Arabic, Spanish & More||Blocking due to cloudflare|No|0
 Apkpure Com|https://apkpure.com|Android|English||||
 APK Downloader (Apk-dl)|https://apk-dl.com|Android|English||||
 Hiapkdownload|https://www.hiapkdownload.com/|Android|Arabic||||
 Apkmonk|https://www.apkmonk.com|Android|English||||
 Happymod|https://www.happymod.com|Android|English||||
 Apkpure Ai|https://apkpure.ai/|Android|English||||
-APK Support|https://apk.support/|Android|English| Approx 2500 (Including Related Search Terms)|| Yes | 127616|
+APK Support|https://apk.support/|Android|English| Approx 2500 || Yes | 127616|
 APK Turbo|https://www.apkturbo.com/|Android|English||||
 Android Apps APK|https://androidappsapk.co/|Android|English||||
 AppPure (iPhone Apkpure)|https://iphone.apkpure.com|iOS|English||||
