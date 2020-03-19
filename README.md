@@ -2,7 +2,7 @@
 WebScraping project for Independent Study at UW Madison - Spring 2020
 | Name          | Link | OS  | Language |Number of Serach Term  | Issue Faced |Completed|Number of Apps Retreived|
 | --------------| ---- | --- | ---------|-----------------------|-------------|---------|------------------------|
-|Apkcombo| https://apkcombo.com|Android|English, Arabic, Spanish & More||||
+|Apkcombo| https://apkcombo.com|Android|English, Arabic, Spanish & More||Blocking due to cloudflare||
 Apkpure Com|https://apkpure.com|Android|English||||
 APK Downloader (Apk-dl)|https://apk-dl.com|Android|English||||
 Hiapkdownload|https://www.hiapkdownload.com/|Android|Arabic||||
