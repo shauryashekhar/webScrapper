@@ -38,7 +38,7 @@ Freeapkbaixar|https://www.freeapkbaixar.com|Android|Portuguese|||||
 Freeapk.id|https://www.freeapk.id|Android|Indonesian||||
 Deepaso|https://www.deepaso.com|iOS|English||||
 APK Fab|https://apkfab.com|Android|English||||
-Malavida|https://www.malavida.com|iOS & Android|English, Spanish, German, Russian, French, Portuguese, Japanese & Italian||||
+Malavida|https://www.malavida.com|iOS & Android|English, Spanish, German, Russian, French, Portuguese, Japanese & Italian|1557|1. No Related Search Term|1177|
 APK GK|https://apkgk.com/|Android|English|1557|1. No related search term| Yes|67518|
 APK Clean|https://apkclean.net/|Android|English|0|1. No website search|No|0|
 
