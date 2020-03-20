@@ -6,7 +6,7 @@ Base Unique Search Terms - 1557
 
 | Name          | Link | OS  | Language |Number of Queries  | Issue Faced |Completed|Number of Apps Retreived|
 | --------------| ---- | --- | ---------|-----------------------|-------------|---------|------------------------|
-|Apkcombo| https://apkcombo.com|Android|English, Arabic, Spanish & More||Blocking due to cloudflare|No|0
+|Apkcombo| https://apkcombo.com|Android|English, Arabic, Spanish & More|0|Blocking due to cloudflare|No|0
 Apkpure Com|https://apkpure.com|Android|English|1557||Yes|~55000|
 APK Downloader (Apk-dl)|https://apk-dl.com|Android|English||||
 Hiapkdownload|https://www.hiapkdownload.com/|Android|Arabic||||
