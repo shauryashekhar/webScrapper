@@ -8,7 +8,7 @@ Base Unique Search Terms - 1557
 | --------------| ---- | --- | ---------|-----------------------|-------------|---------|------------------------|
 |Apkcombo| https://apkcombo.com|Android|English, Arabic, Spanish & More|0|Blocking due to cloudflare|No|0
 Apkpure Com|https://apkpure.com|Android|English|1557||Yes|~55000|
-APK Downloader (Apk-dl)|https://apk-dl.com|Android|English||||
+APK Downloader (Apk-dl)|https://apk-dl.com|Android|English|1557||Yes|~69000|
 Hiapkdownload|https://www.hiapkdownload.com/|Android|Arabic||||
 Apkmonk|https://www.apkmonk.com|Android|English||||
 Happymod|https://www.happymod.com|Android|English||||
