@@ -30,9 +30,9 @@ Droid Informer|https://droidinformer.org/|Android|English||||
 APK Dom|https://apkdom.com|Android|English||||
 Apptopia|https://apptopia.com|Android|English||||
 App Annie|https://www.appannie.com|Android|English||||
-APK Live|https://apks.live|Android|English||||
-AppChoPC|https://appchopc.com|Android|Vietnamese||||
-Hack-Cheat|https://hack-cheat.org|Android|English||||
+APK Live|https://apks.live|Android|English|0|1. No Website search|No|0|
+AppChoPC|https://appchopc.com|Android|Vietnamese|0|1. No Website search|No|0|
+Hack-Cheat|https://hack-cheat.org|Android|English|0|1. No Website search|No|0|
 Apkandroid_RU|https://www.apkandroid.ru|Android|Russian||||
 Freeapkbaixar|https://www.freeapkbaixar.com|Android|Portuguese|||||
 Freeapk.id|https://www.freeapk.id|Android|Indonesian||||
