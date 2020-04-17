@@ -27,7 +27,7 @@ APK.CO|https://apk.co|Android|English|0|1. Search Not Working|No|0|
 AllFreeAPK|https://m.allfreeapk.com|Android|English||||
 APK Plus|https://apk.plus|Android|English|||
 Droid Informer|https://droidinformer.org/|Android|English||||
-APK Dom|https://apkdom.com|Android|English||||
+APK Dom|https://apkdom.com|Android|English|0.|1. Website HTML change when access by python script instead of browser|No|0
 Apptopia|https://apptopia.com|Android|English|0|1. Not a app website|No|0|
 App Annie|https://www.appannie.com|Android|English|0|1. Not a app website|No|0|
 APK Live|https://apks.live|Android|English|0|1. No Website search|No|0|
