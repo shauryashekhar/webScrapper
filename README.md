@@ -24,7 +24,7 @@ APK Plz|https://apkplz.net|Android|English||||
 APKTADA|https://apktada.com|Android|English||||
 APKsFULL|https://apksfull.com|Android|English||||
 APK.CO|https://apk.co|Android|English|0|1. Search Not Working|No|0|
-AllFreeAPK|https://m.allfreeapk.com|Android|English||||
+AllFreeAPK|https://m.allfreeapk.com|Android|English|1557|1. No related search term|Yes|22471(distinct apps)|
 APK Plus|https://apk.plus|Android|English|||
 Droid Informer|https://droidinformer.org/|Android|English||||
 APK Dom|https://apkdom.com|Android|English|0.|1. Website HTML change when access by python script instead of browser|No|0
