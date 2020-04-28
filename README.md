@@ -19,9 +19,9 @@ Android Apps APK|https://androidappsapk.co/|Android|English||||
 AppPure (iPhone Apkpure)|https://iphone.apkpure.com|iOS|English||||
 Android APK|https://android-apk.org/|Android|English|0|1. No Website search|No|0|
 Qimai|https://www.qimai.cn/|iOS & Android|Chinese|0|1. Webiste is in different language|No|0|
-APK Follow|https://www.apkfollow.com|Android|English||||
-APK Plz|https://apkplz.net|Android|English||||
-APKTADA|https://apktada.com|Android|English|1557|1. No realated search term|Yes|40(distinct apps)|
+APK Follow|https://www.apkfollow.com|Android|English|0|1. Captcha required, not able to access through script|No|0|
+APK Plz|https://apkplz.net|Android|English|1557|1. No related search term|Yes|24(distinct apps|
+APKTADA|https://apktada.com|Android|English|1557|1. No related search term|Yes|40(distinct apps)|
 APKsFULL|https://apksfull.com|Android|English||||
 APK.CO|https://apk.co|Android|English|0|1. Search Not Working|No|0|
 AllFreeAPK|https://m.allfreeapk.com|Android|English|1557|1. No related search term|Yes|22471(distinct apps)|
