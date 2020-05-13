@@ -83,7 +83,8 @@ def create_table(conn, create_table_sql):
 
 def databaseStartUp(websiteName):
     # Create connection
-    databaseName = websiteName + ".db"
+    # databaseName = websiteName + ".db"
+    databaseName = "C:\\Users\\USER\\Desktop\\ScrapperProject\\webScrapper\\test.db"
     conn = create_connection(databaseName)
 
     # Create table
@@ -121,6 +122,19 @@ def databaseStartUp(websiteName):
         print("Error! cannot create the database connection.")
     
     return conn
+    
+#Class to store app details in object format
+class AppDetails:
+    def __init__(self, title, description, stars, appID, imageSource, developerName):
+        self.title = title
+        self.description = description
+        self.stars = stars
+        self.appID = appID
+        self.imageSource = imageSource
+        self.developerName = developerName
+        
+    def toString(application):
+        return application.title + ", " + application.appID + ", " + application.description + ", " + application.stars + ", " + application.imageSource + ", " + application.developerName
         
         
 def insertIntoAppDetailsMainTable(conn, task):
@@ -317,6 +331,7 @@ def apkpure():
 def apkplz():
     numberOfTerms = 0
     while(q.empty() != True):
+        print(q.qsize())
         word = q.get()
         time.sleep(1)
         payload = {'q': word}
@@ -588,7 +603,7 @@ def apkgk():
 if __name__ == "__main__":
 
     n = len(sys.argv)
-    if(n != 1):
+    if(n != 2):
         print("Incorrect usage: Please pass in the website you would like to scrape")
         sys.exit(0)
     
@@ -611,7 +626,8 @@ if __name__ == "__main__":
     for term in terms_list:
         result = commaSeparated(term)
         finalTermsList.append(result)
-    print("Number of elements being searched for " + len(finalTermsList))
+    print("Number of elements being searched for ")
+    print(len(finalTermsList))
 
     # CREATION OF QUEUE
     q = Queue()
@@ -621,25 +637,26 @@ if __name__ == "__main__":
             wordSet.add(term)
     for word in wordSet:
         q.put(word)
-    print("Queue size is initially " + q.qsize())
+    print("Queue size is initially ")
+    print(q.qsize())
 
     if(currentWebsiteName == "https://apk-dl.com"):
         apkdl()
-    else if(currentWebsiteName == "https://apkpure.com"):
+    elif(currentWebsiteName == "https://apkpure.com"):
         apkpure()
-    else if(currentWebsiteName == "https://apk.support"):
+    elif(currentWebsiteName == "https://apk.support"):
         apksupport()
-    else if(currentWebsiteName == "https://apkplz.net"):
+    elif(currentWebsiteName == "https://apkplz.net"):
         apkplz()
-    else if(currentWebsiteName == "https://apktada.com"):
+    elif(currentWebsiteName == "https://apktada.com"):
         apktada()
-    else if(currentWebsiteName == "https://m.allfreeapk.com"):
+    elif(currentWebsiteName == "https://m.allfreeapk.com"):
         allfreeapk()
-    else if(currentWebsiteName == "https://apkfab.com"):
+    elif(currentWebsiteName == "https://apkfab.com"):
         apkfab()
-    else if(currentWebsiteName == "https://www.malavida.com"):
+    elif(currentWebsiteName == "https://www.malavida.com"):
         malavida()
-    else if(currentWebsiteName == "https://apkgk.com/"):
+    elif(currentWebsiteName == "https://apkgk.com"):
         apkgk()
 
     print("Task completed...")
