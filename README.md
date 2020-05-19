@@ -37,9 +37,9 @@ Apkandroid_RU|https://www.apkandroid.ru|Android|Russian|0|1.Website is in differ
 Freeapkbaixar|https://www.freeapkbaixar.com|Android|Portuguese|0|1. Website is in different language|No|0|
 Freeapk.id|https://www.freeapk.id|Android|Indonesian|0|1.Website is in different language|No|0|
 Deepaso|https://www.deepaso.com|iOS|English|0|1. Not a app website|No|0|
-APK Fab|https://apkfab.com|Android|English|1557|1.No related search term|Yes|132809|
-Malavida|https://www.malavida.com|iOS & Android|English, Spanish, German, Russian, French, Portuguese, Japanese & Italian|1557|1. No Related Search Term|Yes|1177
-APK GK|https://apkgk.com/|Android|English|1557|1. No related search term| Yes|67518|
+APK Fab|https://apkfab.com|Android|English|1557|1.No related search term|Yes|10692(distinct apps)|
+Malavida|https://www.malavida.com|iOS & Android|English, Spanish, German, Russian, French, Portuguese, Japanese & Italian|1557|1. No Related Search Term|Yes|363(distinct apps)
+APK GK|https://apkgk.com/|Android|English|1557|1. No related search term| Yes|5889(distinct apps)|
 APK Clean|https://apkclean.net/|Android|English|0|1. No website search|No|0|
 
    
