@@ -7,8 +7,8 @@ Base Unique Search Terms - 1557
 | Name          | Link | OS  | Language |Number of Queries  | Issue Faced |Completed|Number of Apps Retreived|
 | --------------| ---- | --- | ---------|-----------------------|-------------|---------|------------------------|
 |Apkcombo| https://apkcombo.com|Android|English, Arabic, Spanish & More|0|Blocking due to cloudflare|No|0
-Apkpure Com|https://apkpure.com|Android|English|1557||Yes|~55000|
-APK Downloader (Apk-dl)|https://apk-dl.com|Android|English|1557||Yes|~69000|
+Apkpure Com|https://apkpure.com|Android|English|1557||Yes|3470(distinct apps)|
+APK Downloader (Apk-dl)|https://apk-dl.com|Android|English|1557||Yes|4133(distinct apps)|
 Hiapkdownload|https://www.hiapkdownload.com/|Android|Arabic|| Only Arabic Search| No |0|
 Apkmonk|https://www.apkmonk.com|Android|English||Cloudflare Error|No|0|
 Happymod|https://www.happymod.com|Android|English||||
@@ -37,9 +37,9 @@ Apkandroid_RU|https://www.apkandroid.ru|Android|Russian|0|1.Website is in differ
 Freeapkbaixar|https://www.freeapkbaixar.com|Android|Portuguese|0|1. Website is in different language|No|0|
 Freeapk.id|https://www.freeapk.id|Android|Indonesian|0|1.Website is in different language|No|0|
 Deepaso|https://www.deepaso.com|iOS|English|0|1. Not a app website|No|0|
-APK Fab|https://apkfab.com|Android|English|1557|1.No related search term|Yes|132809|
-Malavida|https://www.malavida.com|iOS & Android|English, Spanish, German, Russian, French, Portuguese, Japanese & Italian|1557|1. No Related Search Term|Yes|1177
-APK GK|https://apkgk.com/|Android|English|1557|1. No related search term| Yes|67518|
+APK Fab|https://apkfab.com|Android|English|1557|1.No related search term|Yes|10692(distinct apps)|
+Malavida|https://www.malavida.com|iOS & Android|English, Spanish, German, Russian, French, Portuguese, Japanese & Italian|1557|1. No Related Search Term|Yes|363(distinct apps)
+APK GK|https://apkgk.com/|Android|English|1557|1. No related search term| Yes|5889(distinct apps)|
 APK Clean|https://apkclean.net/|Android|English|0|1. No website search|No|0|
 
    
