@@ -21,6 +21,15 @@ def countArgumentsPassed(args):
         count = count + 1
     return count
 
+def runAllSupportedWebsites():
+    
+
+def runSingleWebsite(website):
+
+
+def runWebsiteList(websites):
+
+
 if __name__ == "__main__":
 
     # print("Hello! This is the new script which uses the dataset package")
@@ -35,8 +44,11 @@ if __name__ == "__main__":
         sys.exit(0)
     if args.all:
         print("Run for all websites")
+        runAllSupportedWebsites()
     elif args.website:
         print("Running with " + args.website)
+        runSingleWebsite(args.website)
     elif args.websites:
         print("Running with list of websites " + args.websites)
+        runWebsiteList(args.websites)
     sys.exit(0)
