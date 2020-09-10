@@ -3,6 +3,7 @@ import time
 from bs4 import BeautifulSoup
 import csv
 from collections import defaultdict
+from databaseUtility import *
 import json
 import sqlite3
 from sqlite3 import Error
@@ -22,13 +23,13 @@ def countArgumentsPassed(args):
     return count
 
 def runAllSupportedWebsites():
-    
+    print("")
 
 def runSingleWebsite(website):
-
+    print("")
 
 def runWebsiteList(websites):
-
+    print("")
 
 if __name__ == "__main__":
 
@@ -42,13 +43,17 @@ if __name__ == "__main__":
     if count > 1:
         print("Please choose one of the flags available (-a, -w, -ws). Run script with '-h' flag to see how to run it")
         sys.exit(0)
-    if args.all:
-        print("Run for all websites")
+    elif count == 1:
+        if args.all:
+            print("Run for all websites")
+            runAllSupportedWebsites()
+        elif args.website:
+            print("Running with " + args.website)
+            runSingleWebsite(args.website)
+        elif args.websites:
+            print("Running with list of websites " + args.websites)
+            runWebsiteList(args.websites)
+    elif count == 0:
+        print("No args passed. Defaulting to all websites")
         runAllSupportedWebsites()
-    elif args.website:
-        print("Running with " + args.website)
-        runSingleWebsite(args.website)
-    elif args.websites:
-        print("Running with list of websites " + args.websites)
-        runWebsiteList(args.websites)
     sys.exit(0)
