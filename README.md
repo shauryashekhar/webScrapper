@@ -1,6 +1,12 @@
 # Web Scraping Project
 
-Web Scraping project for Independent Study (under Prof. Rahul Chatterjee) at UW Madison - Spring 2020
+Web Scraping project for Independent Study (under Prof. Rahul Chatterjee) at UW Madison - Spring 2020, continuted into Fall 2020.
+
+The original scraper has been broken down into components:-
+1. newScraper: which starts the initial scraping, it is also responsible for parsing the arguments passed to the script
+2. utility: responsible for reading the seed search terms
+3. databaseUtility: driver functions for database operations
+4. parserUtility: have dedicated parsing functions for support of all individual websites
 
 Base Unique Search Terms - 1557
 
