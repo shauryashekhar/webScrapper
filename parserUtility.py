@@ -1,4 +1,6 @@
 from databaseUtility import *
+from datetime import datetime
+import time
 
 def apksupport(db, q):
     numberOfTerms = 0
@@ -12,9 +14,10 @@ def apksupport(db, q):
         names_table = soup.find_all("div", attrs={"class": "it_column"})
         if(len(names_table) == 0):
             continue
-        finalList = []
         appIDList = ""
         first = 0
+        # Create appDetailsTable in DB
+        appDetailsTable = getTable(db, 'ApksupportAppDetails')
         for name in names_table:
             # Developer Information
             developerPart = name.find_all("div", attrs={"class": "ss_tg"})
@@ -45,14 +48,12 @@ def apksupport(db, q):
             imageTag = information[0].find_all("div", attrs={"class" : "seo_img"})
             imageTag = imageTag[0].find_all("img")
             imageSource = imageTag[0]['data-original']
-            perAppObject = AppDetails(title, description, starCount, appID, imageSource, developerName)
-            
-            # Insert Into App Table
-            # taskAppTable = (appID, title, description, stars, imageSource, developerName, 'apk.support')
-            # insertIntoAppDetails(conn, taskAppTable)
-            
-            finalList.append(perAppObject)
-            
+            # Time
+            currentTime = datetime.now()
+            # Insert into appDetails table
+            appDetailsTableEntry = (appID, title, description, stars, imageSource, developerName, 'apk.support', currentTime)
+            insertIntoAppDetailsTable(table, dict(appID=appID, title=title, description=description, stars=stars, imageSource=imageSource, developerName=developerName, websiteName='apk.support', createdAt=currentTime))
+
         # Suggestion Addition
         suggestionList = soup.find_all("div", attrs={"class": "suggest"})
         suggestionList = suggestionList[0].find_all("li")
@@ -70,10 +71,19 @@ def apksupport(db, q):
             if(modifiedSuggestionName not in wordSet):
                 wordSet.add(modifiedSuggestionName)
                 q.put(modifiedSuggestionName)
-        
-        #Insert Into Main Table
-        taskMainTable = (word, appIDList, suggestionsString, 'apk.support')
-        insertIntoAppDetailsMainTable(conn, taskMainTable)
+
+        # Create appIdTable & suggestionTable in DB
+        appIdTable = getTable(db, 'ApksupportAppId')
+        suggestionTable = getTable(db, 'ApksupportSuggestions')        
+
+        # Create entries for tables
+        currentTime = datetime.now()
+        appIdTableEntry = (word, appIDList, 'apk.support', currentTime)
+        suggestionTableEntry = (word, suggestionsString, 'apk.support', currentTime)
+
+
+        # Enter into appIdTable & suggestionTable
+
         numberOfTerms = numberOfTerms + 1
         if(numberOfTerms == 5000):
             break

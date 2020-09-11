@@ -5,6 +5,7 @@ import csv
 from collections import defaultdict
 from databaseUtility import *
 from parserUtility import *
+from utility import *
 import json
 import sqlite3
 from sqlite3 import Error
@@ -25,66 +26,15 @@ def countArgumentsPassed(args):
         count = count + 1
     return count
 
-termsList = []
-finalTermsList = []
-
-def commaSeparated(term):
-    result = ""
-    if len(term.split(' ')) > 1:
-        count = len(term.split(' '))
-        i = 0
-        for word in term.split(' '):
-            if i > 0:
-                result = result + "+"
-            result = result + word
-            i = i + 1
-        return result
-    else:
-        return term
-
-def readTermsAndCreateQueue():
-    with open('android_terms.csv','rt')as f:
-        data = csv.reader(f)
-        lineNumber = 0
-        for row in data:
-                if lineNumber >= 1:
-                    key = row[2]
-                    terms = row[3]
-                    i = 0
-                    for term in terms.split('"'):
-                        if i%2 == 0:
-                            i = i+1
-                            continue
-                        else:
-                            i = i+1
-                            termsList.append(term)
-                else:
-                    lineNumber = lineNumber + 1
-    for term in termsList:
-        result = commaSeparated(term)
-        finalTermsList.append(result)
-    print("Number of elements being searched for ")
-    print(len(finalTermsList))
-    q = Queue()
-    wordSet = set()
-    for term in finalTermsList:
-        if(term != ""):
-            wordSet.add(term)
-    for word in wordSet:
-        q.put(word)
-    print("Queue size is initially ")
-    print(q.qsize())
-    return q
-
 def runAllSupportedWebsites(termsQueue):
     db = databaseStartUp()
     apksupport(db, termsQueue)
     print("Finished Processing for all supported websites")
 
-def runSingleWebsite(website):
+def runSingleWebsite(website, termsQueue):
     print("")
 
-def runWebsiteList(websites):
+def runWebsiteList(websites, termsQueue):
     print("")
 
 if __name__ == "__main__":
@@ -105,11 +55,12 @@ if __name__ == "__main__":
             runAllSupportedWebsites(termsQueue)
         elif args.website:
             print("Running with " + args.website)
-            runSingleWebsite(args.website)
+            runSingleWebsite(args.website, termsQueue)
         elif args.websites:
             print("Running with list of websites " + args.websites)
-            runWebsiteList(args.websites)
+            runWebsiteList(args.websites, termsQueue)
     elif count == 0:
         print("No args passed. Defaulting to all websites")
-        runAllSupportedWebsites()
+        termsQueue = readTermsAndCreateQueue()
+        runAllSupportedWebsites(termsQueue)
     sys.exit(0)
