@@ -28,7 +28,8 @@ def countArgumentsPassed(args):
 
 def runAllSupportedWebsites(termsQueue):
     db = databaseStartUp()
-    apksupport(db, termsQueue)
+    # apksupport(db, termsQueue)
+    apkdl(db, termsQueue)
     print("Finished Processing for all supported websites")
 
 def runSingleWebsite(website, termsQueue):

@@ -440,7 +440,7 @@ def allfreeapk():
             description = "NULL"
             developerName = "NULL"
             imageSource = appDetails[0].find_all("img")
-            imageSource = imageSource[0]["data-original"];
+            imageSource = imageSource[0]["data-original"]
             appID = appDetails[0].find_all("a")
             appID = appID[0]["href"]
             if first != 0:
