@@ -1,17 +1,20 @@
 from databaseUtility import *
 from datetime import datetime
 import time
+import requests
+from bs4 import BeautifulSoup
 
 def apksupport(db, q):
     numberOfTerms = 0
     while(q.empty() != True):
-        word = q.get()
         time.sleep(1)
         payload = {'q': word, 't': 'app'}
         r = requests.get('https://apk.support/search', params=payload)
         soup = BeautifulSoup(r.text, 'html.parser')
         # Get App Names
         names_table = soup.find_all("div", attrs={"class": "it_column"})
+        # Time
+        currentTime = datetime.now()
         if(len(names_table) == 0):
             continue
         appIDList = ""
@@ -48,9 +51,8 @@ def apksupport(db, q):
             imageTag = information[0].find_all("div", attrs={"class" : "seo_img"})
             imageTag = imageTag[0].find_all("img")
             imageSource = imageTag[0]['data-original']
-            # Time
-            currentTime = datetime.now()
-            # Insert into appDetails table
+
+            # Insert Into AppDetails Table (one per app)
             appDetailsTableEntry = (appID, title, description, stars, imageSource, developerName, 'apk.support', currentTime)
             insertIntoAppDetailsTable(table, dict(appID=appID, title=title, description=description, stars=stars, imageSource=imageSource, developerName=developerName, websiteName='apk.support', createdAt=currentTime))
 
@@ -82,7 +84,9 @@ def apksupport(db, q):
         suggestionTableEntry = (word, suggestionsString, 'apk.support', currentTime)
 
 
-        # Enter into appIdTable & suggestionTable
+        # Enter into appIdTable & suggestionTable (one per word)
+        insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'apk.support', createdAt = currentTime))
+        insertIntoSugesstionsTable(suggestionTable, dict(word=word, relatedSearchTerms= suggestionsString, websiteName = 'apk.support', createdAt = currentTime))
 
         numberOfTerms = numberOfTerms + 1
         if(numberOfTerms == 5000):

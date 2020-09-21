@@ -24,14 +24,33 @@ def insertIntoAppDetailsTable(table, details):
                 continue
             else:
                 table.insert(details)
-    print("insertIntoAppDetailsTable")
 
 def insertIntoAppIdTable(table, details):
-
+    row = table.find_one(details['word'])
+    if row == None:
+        # First time entry hence, insert
+        table.insert(details)
+    else:
+        # Else see if there are changes, if there are, update the same tuple
+        for key in details.keys():
+            if key != 'currentTime' and row[key] == details[key]:
+                continue
+            else:
+                table.insert(details)
     print("insertIntoAppIdTable")
 
 def insertIntoSugesstionsTable(table, details):
-
+    row = table.find_one(details['word'])
+    if row == None:
+        # First time entry hence, insert
+        table.insert(details)
+    else:
+        # Else see if there are changes, if there are, update the same tuple
+        for key in details.keys():
+            if key != 'currentTime' and row[key] == details[key]:
+                continue
+            else:
+                table.insert(details)
     print("insertIntoSugesstionsTable")
 
 def updateTable():
