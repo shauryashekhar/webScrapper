@@ -19,10 +19,13 @@ def insertIntoAppDetailsTable(table, details):
     else:
         # Else see if there are changes, if there are, update the same tuple
         for key in details.keys():
-            if key != 'currentTime' and row[key] == details[key]:
-                continue
-            else:
-                table.insert(details)
+            if key != 'createdAt':
+                if row[key] == details[key]:
+                    continue
+                else:
+                    table.insert(details)
+                    break
+
 
 def insertIntoAppIdTable(table, details):
     row = table.find_one(word = details['word'])
@@ -32,11 +35,12 @@ def insertIntoAppIdTable(table, details):
     else:
         # Else see if there are changes, if there are, update the same tuple
         for key in details.keys():
-            if key != 'currentTime' and row[key] == details[key]:
-                continue
-            else:
-                table.insert(details)
-    print("insertIntoAppIdTable")
+            if key != 'createdAt':
+                if row[key] == details[key]:
+                    continue
+                else:
+                    table.insert(details)
+                    break
 
 def insertIntoSugesstionsTable(table, details):
     row = table.find_one(word = details['word'])
@@ -52,5 +56,8 @@ def insertIntoSugesstionsTable(table, details):
                 table.insert(details)
     print("insertIntoSugesstionsTable")
 
-def updateTable():
-    print("updateTable")
+def getStats(db):
+    statement = 'SELECT websiteName, COUNT(*) c from AppDetails GROUP BY websiteName'
+    print('The stats of AppDetails are:')
+    for row in db.query(statement):
+        print(row['websiteName'] + " " + row['c'])
