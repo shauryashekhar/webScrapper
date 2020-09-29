@@ -4,7 +4,9 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
+#Failing. Use user-agent fix
 def apksupport(db, q):
+    print("Starting apksupport")
     numberOfTerms = 0
     while(q.empty() != True):
         time.sleep(1)
@@ -92,7 +94,9 @@ def apksupport(db, q):
         if(numberOfTerms == 5000):
             break
 
+#Completed
 def apkdl(db, q):
+    print("Starting apkdl")
     numberOfTerms = 0
     while(q.empty() != True):
         word = q.get()
@@ -141,8 +145,10 @@ def apkdl(db, q):
         if(numberOfTerms == 5000):
             break
 
+#Completed
 def apkpure(db, q):
     numberOfTerms = 0
+    print("Starting apkpure")
     while(q.empty() != True):
         word = q.get()
         print("Starting " + word + " " + str(numberOfTerms) + " with queue length " + str(q.qsize()))
@@ -199,6 +205,7 @@ def apkpure(db, q):
             break
 
 def apkplz(db, queue):
+    print("Starting apkplz")
     numberOfTerms = 0
     while(q.empty() != True):
         word = q.get()
@@ -236,6 +243,7 @@ def apkplz(db, queue):
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'apkplz.com', createdAt = currentTime))
     
 def apktada(db, q):
+    print("Starting apktada")
     numberOfTerms = 0
     while(q.empty() != True):
         word = q.get()
@@ -273,6 +281,7 @@ def apktada(db, q):
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'apktada.com', createdAt = currentTime))
 
 def allfreeapk(db, q):
+    print("Starting allfreeapk")
     numberOfTerms = 0
     while(q.empty() != True):
         word = q.get()

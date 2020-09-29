@@ -26,10 +26,9 @@ def countArgumentsPassed(args):
 
 def runAllSupportedWebsites(termsQueue):
     db = databaseStartUp()
-    # Failing: Try After user-agent fix
     # apksupport(db, termsQueue)
-    apkdl(db, termsQueue)
-    # apkpure(db, termsQueue)
+    # apkdl(db, termsQueue)
+    apkpure(db, termsQueue)
     # apkplz(db, termsQueue)
     # apktada(db, termsQueue)
     # allfreeapk(db, termsQueue)
