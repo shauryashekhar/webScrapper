@@ -10,8 +10,11 @@ def apksupport(db, q):
     numberOfTerms = 0
     while(q.empty() != True):
         time.sleep(1)
+        word = q.get()
+        print("Starting " + word + " " + str(numberOfTerms) + " with queue length " + str(q.qsize()))
         payload = {'q': word, 't': 'app'}
-        r = requests.get('https://apk.support/search', params=payload)
+        headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+        r = requests.get('https://apk.support/search', params=payload, headers=headers)
         soup = BeautifulSoup(r.text, 'html.parser')
         # Get App Names
         names_table = soup.find_all("div", attrs={"class": "it_column"})
@@ -240,7 +243,8 @@ def apkplz(db, q):
         #Insert Into Main Table
         appIdTable = getTable(db, 'AppId')
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'apkplz.com', createdAt = currentTime))
-    
+
+# Completed    
 def apktada(db, q):
     print("Starting apktada")
     numberOfTerms = 0
@@ -277,6 +281,7 @@ def apktada(db, q):
             insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, imageSource=imageSource, websiteName='apktada.com', createdAt=currentTime))
 
         #Insert Into Main Table
+        appIdTable = getTable(db, 'AppId')
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'apktada.com', createdAt = currentTime))
 
 def allfreeapk(db, q):
@@ -316,6 +321,7 @@ def allfreeapk(db, q):
             insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, imageSource=imageSource, websiteName='m.allfreeapk.com', createdAt=currentTime))
 
         #Insert Into Main Table
+        appIdTable = getTable(db, 'AppId')
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'm.allfreeapk.com', createdAt = currentTime))
 
 def apkfab(db, q):
