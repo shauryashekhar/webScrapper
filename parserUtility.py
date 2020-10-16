@@ -201,7 +201,8 @@ def apkpure(db, q):
         if(numberOfTerms == 5000):
             break
 
-def apkplz(db, queue):
+# Completed
+def apkplz(db, q):
     print("Starting apkplz")
     numberOfTerms = 0
     while(q.empty() != True):
@@ -237,6 +238,7 @@ def apkplz(db, queue):
             insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, imageSource=imageSource, websiteName='apkplz.com', createdAt=currentTime))
             
         #Insert Into Main Table
+        appIdTable = getTable(db, 'AppId')
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'apkplz.com', createdAt = currentTime))
     
 def apktada(db, q):
@@ -330,6 +332,7 @@ def apkfab(db, q):
         finalList = []
         appIDList = ""
         first = 0
+        appDetailsTable = getTable(db, 'AppDetails')
         currentTime = datetime.now()
         for app in appList:
             title = app.find_all("div",attrs={"class":"title"})
@@ -351,6 +354,7 @@ def apkfab(db, q):
             insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, stars= starCount, imageSource=imageSource, websiteName='apkfab.com', createdAt=currentTime))
             
         #Insert Into Main Table
+        appIdTable = getTable(db, 'AppId')
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'apkfab.com', createdAt = currentTime))
 
 def malavida(db, q):
@@ -372,6 +376,7 @@ def malavida(db, q):
         notFound = soup.find_all("section", attrs={"class":'not-found'})
         if(len(notFound)>0):
             continue
+        appDetailsTable = getTable(db, 'AppDetails')
         currentTime = datetime.now()
         for app in appList:
             appSrc = app.find_all("div", attrs={"class":"title"})
@@ -394,6 +399,7 @@ def malavida(db, q):
             counter=counter+1
 
         #Insert Into Main Table
+        appIdTable = getTable(db, 'AppId')
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'malavida.com', createdAt = currentTime))
 
 # EDITING LEFT BELOW THIS LINE
