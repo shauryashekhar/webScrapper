@@ -319,20 +319,21 @@ def allfreeapk(db, q):
         #Insert Into Main Table
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'm.allfreeapk.com', createdAt = currentTime))
 
-# EDITING LEFT BELOW THIS LINE
-
 def apkfab(db, q):
+    print("Starting apkfab")
     numberOfTerms = 0
     while(q.empty() != True):
         word = q.get()
+        print("Starting " + word + " " + str(numberOfTerms) + " with queue length " + str(q.qsize()))
         time.sleep(1)
-        payload = {'q': word};
-        r = requests.get('https://apkfab.com/search', params=payload);
-        soup = BeautifulSoup(r.text, 'html.parser');
+        payload = {'q': word}
+        r = requests.get('https://apkfab.com/search', params=payload)
+        soup = BeautifulSoup(r.text, 'html.parser')
         appList = soup.find_all("div", attrs={"class":'list'})
         finalList = []
         appIDList = ""
         first = 0
+        currentTime = datetime.now()
         for app in appList:
             title = app.find_all("div",attrs={"class":"title"})
             if(len(title)  < 1):
@@ -350,26 +351,24 @@ def apkfab(db, q):
                 appIDList = appIDList + ","
             appIDList = appIDList + appID
             first = 1
-            perAppObject = AppDetails(title, description, starCount, appID, imageSource, developerName)
             
             # Insert Into App Table
-            taskAppTable = (appID, title, description, starCount, imageSource, developerName, 'apkfab.com');
-            insertIntoAppDetails(conn, taskAppTable)
+            insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, stars= starCount, imageSource=imageSource, websiteName='apkfab.com', createdAt=currentTime))
             
-            finalList.append(perAppObject)
         #Insert Into Main Table
         suggestionsString = "NULL"
-        taskMainTable = (word, appIDList, suggestionsString, 'apkfab.com');
-        insertIntoAppDetailsMainTable(conn, taskMainTable)
-            
+        insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'apkfab.com', createdAt = currentTime))
+
 def malavida(db, q):
+    print("Starting malavida")
     numberOfTerms = 0
     while(q.empty() != True):
         word = q.get()
+        print("Starting " + word + " " + str(numberOfTerms) + " with queue length " + str(q.qsize()))
         time.sleep(1)
         word = word.replace('+','-')
-        r = requests.get('https://www.malavida.com/en/s/'+word);
-        soup = BeautifulSoup(r.text, 'html.parser');
+        r = requests.get('https://www.malavida.com/en/s/'+word)
+        soup = BeautifulSoup(r.text, 'html.parser')
         appDetails = soup.find_all("section", attrs={"class":'app-list'})
         appList = soup.find_all("section", attrs={"class":'app-download'})
         counter = 0
@@ -379,6 +378,7 @@ def malavida(db, q):
         notFound = soup.find_all("section", attrs={"class":'not-found'})
         if(len(notFound)>0):
             continue
+        currentTime = datetime.now()
         for app in appList:
             appSrc = app.find_all("div", attrs={"class":"title"})
             appDesc = app.find_all("p")
@@ -394,20 +394,16 @@ def malavida(db, q):
                 appIDList = appIDList + ","
             appIDList = appIDList + appID
             first = 1
-            starCount = "NULL"
-            developerName = "NULL"
-            perAppObject = AppDetails(title, description, starCount, appID, imageSource, developerName)
             
             # Insert Into App Table
-            taskAppTable = (appID, title, description, starCount, imageSource, developerName, 'malavida.com');
-            insertIntoAppDetails(conn, taskAppTable)
-            
-            finalList.append(perAppObject)
+            insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, imageSource=imageSource, websiteName='malavida.com', createdAt=currentTime))
             counter=counter+1
+
         #Insert Into Main Table
         suggestionsString = "NULL"
-        taskMainTable = (word, appIDList, suggestionsString, 'malavida.com');
-        insertIntoAppDetailsMainTable(conn, taskMainTable)
+        insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'malavida.com', createdAt = currentTime))
+
+# EDITING LEFT BELOW THIS LINE
 
 def apkgk():
     numberOfTerms = 0
