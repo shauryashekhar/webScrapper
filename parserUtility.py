@@ -55,7 +55,6 @@ def apksupport(db, q):
             imageSource = imageTag[0]['data-original']
 
             # Insert Into AppDetails Table (one per app)
-            appDetailsTableEntry = (appID, title, description, stars, imageSource, developerName, 'apk.support', currentTime)
             insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, description=description, stars=stars, imageSource=imageSource, developerName=developerName, websiteName='apk.support', createdAt=currentTime))
 
         # Suggestion Addition
@@ -134,7 +133,6 @@ def apkdl(db, q):
             appIDList = appIDList + appID
             first = 1
 
-            appTableEntry = (appID, title, 'null', stars, imageLink, developerName, 'apk-dl.com')
             insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, stars=stars, imageSource=imageLink, developerName=developerName, websiteName='apk-dl.com', createdAt=currentTime))
             print('App Entered')
         
@@ -192,7 +190,6 @@ def apkpure(db, q):
                 appIDList = appIDList + appID
                 first = 1
                 
-                appTableEntry = (appID, title, 'null', stars, imageLink, developerName, 'apkpure.com')
                 insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, stars=stars, imageSource=imageLink, developerName=developerName, websiteName='apkpure.com', createdAt=currentTime))
             firstCheck = 0
             if(len(names_table) == 0):
@@ -341,8 +338,6 @@ def apkfab(db, q):
             title = title[0].get_text()
             rating = app.find_all("span", attrs={"class":"rating"})
             starCount = rating[0].get_text()
-            description = "NULL"
-            developerName = "NULL"
             imageSource = app.find_all("img")
             imageSource  = imageSource[0]['data-src']
             appID = app.find_all("a")
@@ -356,7 +351,6 @@ def apkfab(db, q):
             insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, stars= starCount, imageSource=imageSource, websiteName='apkfab.com', createdAt=currentTime))
             
         #Insert Into Main Table
-        suggestionsString = "NULL"
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'apkfab.com', createdAt = currentTime))
 
 def malavida(db, q):
@@ -396,11 +390,10 @@ def malavida(db, q):
             first = 1
             
             # Insert Into App Table
-            insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, imageSource=imageSource, websiteName='malavida.com', createdAt=currentTime))
+            insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, imageSource=imageSource, description= description, websiteName='malavida.com', createdAt=currentTime))
             counter=counter+1
 
         #Insert Into Main Table
-        suggestionsString = "NULL"
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'malavida.com', createdAt = currentTime))
 
 # EDITING LEFT BELOW THIS LINE
