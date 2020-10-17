@@ -53,7 +53,8 @@ if __name__ == "__main__":
     parser.add_argument("-a", "--all", help="run for all websites", action="store_true")
     parser.add_argument("-w","--website", help="run for one particular website")
     parser.add_argument("-ws", "--websites", help="run for list of webistes")
-    parser.add_argument("-s", "--statisticss", help="get statistics", action="store_true")
+    parser.add_argument("-s", "--statistics", help="get statistics", action="store_true")
+    parser.add_argument("-sw", "--supportedWebsites", help="list supported websites", action="store_true")
     args = parser.parse_args()
     count = countArgumentsPassed(args)
     if count > 1:
@@ -70,8 +71,10 @@ if __name__ == "__main__":
         elif args.websites:
             print("Running with list of websites " + args.websites)
             runWebsiteList(args.websites, termsQueue)
-        elif args.stats:
+        elif args.statistics:
             print("Add function to call statistics")
+        elif args.supportedWebsites:
+            print("Add function to list supported websites")
     elif count == 0:
         print("No args passed. Defaulting to all websites")
         termsQueue = readTermsAndCreateQueue()
