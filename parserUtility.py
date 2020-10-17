@@ -284,6 +284,7 @@ def apktada(db, q):
         appIdTable = getTable(db, 'AppId')
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'apktada.com', createdAt = currentTime))
 
+# Completed
 def allfreeapk(db, q):
     print("Starting allfreeapk")
     numberOfTerms = 0
@@ -292,9 +293,7 @@ def allfreeapk(db, q):
         print("Starting " + word + " " + str(numberOfTerms) + " with queue length " + str(q.qsize()))
         time.sleep(1)
         payload = {'q': word}
-        print(payload)
         r = requests.get('https://m.allfreeapk.com/search.html?', params=payload)
-        print(r)
         soup = BeautifulSoup(r.text, 'html.parser')
         appList = soup.find_all("div", attrs={"class":"list"})
         appList = appList[0].find_all("li")
