@@ -32,7 +32,6 @@ def countArgumentsPassed(args):
     return count
 
 def runAllSupportedWebsites():
-    db = databaseStartUp()
     # apksupport(db, termsQueue)
     # apkdl(db, termsQueue)
     # apkpure(db, termsQueue)
@@ -73,9 +72,12 @@ def getStatistics():
     getStats(db)
 
 def listSupportedWebsites():
-    print("The following websites are currently supported!")
+    print("===The following websites are currently supported!===")
+    print("=====================================================")
     for k, v in dispatcher.items():
         print(k)
+    print("=====================================================")
+    print("Please enter these keys to run the appropriate parser")
 
 if __name__ == "__main__":
 
