@@ -8,6 +8,15 @@ The original scraper has been broken down into components:-
 3. databaseUtility: driver functions for database operations
 4. parserUtility: have dedicated parsing functions for support of all individual websites
 
+The newScraper accepts the following arguments:-
+| Flag | Type | Operation|
+|-|-|-|
+| -a | Boolean | Run for all Websites|
+|-w | Accepts a string as input | Run for one website (which is specified)|
+|-ws | Accepts a string as input | Run for set of websites (comma separated) |
+|-s | Boolean | Returns statistics on unique application IDs grouped by website name |
+|-sw | Boolean | Lists the websites supported|
+
 Due to 100MB per-file size limitation on github, database.db has been shifted to https://drive.google.com/file/d/15SSPPk1u1OC3alDa85rofeLcFD1lOtDJ/view?usp=sharing.
 
 Base Unique Search Terms - 1557
