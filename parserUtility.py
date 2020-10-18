@@ -31,7 +31,7 @@ def apksupport(db, q):
         appIDList = ""
         first = 0
         # Create appDetailsTable in DB
-        appDetailsTable = getTable(db, 'ApksupportAppDetails')
+        appDetailsTable = getTable(db, 'AppDetails')
         for name in names_table:
             # Developer Information
             developerPart = name.find_all("div", attrs={"class": "ss_tg"})
@@ -85,8 +85,8 @@ def apksupport(db, q):
                 q.put(modifiedSuggestionName)
 
         # Create appIdTable & suggestionTable in DB
-        appIdTable = getTable(db, 'ApksupportAppId')
-        suggestionTable = getTable(db, 'ApksupportSuggestions')        
+        appIdTable = getTable(db, 'AppId')
+        suggestionTable = getTable(db, 'AppSuggestions')        
 
         # Create entries for tables
         currentTime = datetime.now()
@@ -414,8 +414,9 @@ def malavida(db, q):
         appIdTable = getTable(db, 'AppId')
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'malavida.com', createdAt = currentTime))
 
-
-def apkgk():
+# Completed
+def apkgk(db, q):
+    print("Starting apkgk")
     numberOfTerms = 0
     while(q.empty() != True):
         word = q.get()
@@ -451,12 +452,13 @@ def apkgk():
                 appIDList = appIDList + ","
             appIDList = appIDList + appID
             first = 1
-            description = appDesc[0].get_text()
+            if (len(appDesc) > 0):
+                description = appDesc[0].get_text()
+            else:
+                description = "NULL"
             title = appName[0].get_text()
             
             # Insert Into App Table
-            perAppObject = (title, appID, imageSource)
-            print(perAppObject)
             insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, imageSource=imageSource, description= description, websiteName='apkgk.com', createdAt=currentTime))
             counter=counter+1
 

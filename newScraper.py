@@ -32,8 +32,8 @@ def countArgumentsPassed(args):
     return count
 
 dispatcher = {
-    'apksupport': apksupportTest,
-    'apkdl': apkdlTest,
+    'apksupport': apksupport,
+    'apkdl': apkdl,
     'apkpure': apkpure,
     'apkplz': apkplz,
     'apktada': apktada,
@@ -53,9 +53,9 @@ def runAllSupportedWebsites():
     # allfreeapk(db, termsQueue)
     # apkfab(db, termsQueue)
     # malavida(db, termsQueue)
-    apkgk(db, termsQueue)
-    # for k, v in dispatcher.items():
-    #     dispatcher[v](db, termsQueue)
+    # apkgk(db, termsQueue)
+    for k, v in dispatcher.items():
+        dispatcher[v](db, termsQueue)
     print("Finished Processing for all supported websites")
 
 def runSingleWebsite(website):
