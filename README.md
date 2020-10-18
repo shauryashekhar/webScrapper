@@ -8,6 +8,8 @@ The original scraper has been broken down into components:-
 3. databaseUtility: driver functions for database operations
 4. parserUtility: have dedicated parsing functions for support of all individual websites
 
+Database.db has been shifted to https://drive.google.com/file/d/15SSPPk1u1OC3alDa85rofeLcFD1lOtDJ/view?usp=sharing.
+
 Base Unique Search Terms - 1557
 
 | Name          | Link | OS  | Language |Number of Queries  | Issue Faced |Completed|Number of Apps Retreived|
