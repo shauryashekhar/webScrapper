@@ -41,17 +41,17 @@ def runAllSupportedWebsites(termsQueue):
     # apkgk(db, termsQueue)
     print("Finished Processing for all supported websites")
 
-# dispatcher = {
-#     'apksupport': apksupportTest()
-# }
+dispatcher = {
+    'apksupport': apksupportTest
+}
 
 def runSingleWebsite(website, termsQueue):
+    print("Came inside single website")
     db = databaseStartUp()
     try:
-        dispatcher[website](db, termsQueue)
+        dispatcher[website]()
     except:
         return "Invalid website name"
-    print("Came inside single website")
 
 def runWebsiteList(websites, termsQueue):
     db = databaseStartUp()
@@ -82,15 +82,15 @@ if __name__ == "__main__":
     elif count == 1:
         if args.all:
             termsQueue = readTermsAndCreateQueue()
-            print("Run for all websites")
+            print("Run for all websites from main")
             runAllSupportedWebsites(termsQueue)
         elif args.website:
             termsQueue = readTermsAndCreateQueue()
-            print("Running with " + args.website)
+            print("Running from main with " + args.website)
             runSingleWebsite(args.website, termsQueue)
         elif args.websites:
             termsQueue = readTermsAndCreateQueue()
-            print("Running with list of websites " + args.websites)
+            print("Running from main with list of websites " + args.websites)
             runWebsiteList(args.websites, termsQueue)
         elif args.statistics:
             print("Calling statistics")

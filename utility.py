@@ -38,7 +38,7 @@ def readTermsAndCreateQueue():
     for term in termsList:
         result = commaSeparated(term)
         finalTermsList.append(result)
-    print("Number of elements being searched for " + str(len(finalTermsList)))
+    # print("Number of elements being searched for " + str(len(finalTermsList)))
     q = Queue()
     wordSet = set()
     for term in finalTermsList:
@@ -46,5 +46,5 @@ def readTermsAndCreateQueue():
             wordSet.add(term)
     for word in wordSet:
         q.put(word)
-    print("Queue size is initially " + str(q.qsize()))
+    # print("Queue size is initially " + str(q.qsize()))
     return q
