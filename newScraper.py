@@ -31,18 +31,6 @@ def countArgumentsPassed(args):
         count = count + 1
     return count
 
-def runAllSupportedWebsites():
-    # apksupport(db, termsQueue)
-    # apkdl(db, termsQueue)
-    # apkpure(db, termsQueue)
-    # apkplz(db, termsQueue)
-    # apktada(db, termsQueue)
-    # allfreeapk(db, termsQueue)
-    # apkfab(db, termsQueue)
-    malavida(db, termsQueue)
-    # apkgk(db, termsQueue)
-    print("Finished Processing for all supported websites")
-
 dispatcher = {
     'apksupport': apksupportTest,
     'apkdl': apkdlTest,
@@ -54,6 +42,21 @@ dispatcher = {
     'malavida': malavida,
     'apkgk': apkgk 
 }
+
+def runAllSupportedWebsites():
+    print("Started processing for all supported websites")
+    # apksupport(db, termsQueue)
+    # apkdl(db, termsQueue)
+    # apkpure(db, termsQueue)
+    # apkplz(db, termsQueue)
+    # apktada(db, termsQueue)
+    # allfreeapk(db, termsQueue)
+    # apkfab(db, termsQueue)
+    # malavida(db, termsQueue)
+    apkgk(db, termsQueue)
+    # for k, v in dispatcher.items():
+    #     dispatcher[v](db, termsQueue)
+    print("Finished Processing for all supported websites")
 
 def runSingleWebsite(website):
     print("Came inside single website")
@@ -90,7 +93,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     count = countArgumentsPassed(args)
     if count > 1:
-        print("Please choose one of the flags available (-a, -w, -ws). Run script with '-h' flag to see how to run it")
+        print("Please choose one of the flags available (-a, -w, -ws, -s, -sw). Run script with '-h' flag to see how to run it")
         sys.exit(0)
     elif count == 1:
         if args.all:

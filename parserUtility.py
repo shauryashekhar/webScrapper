@@ -369,7 +369,7 @@ def apkfab(db, q):
         appIdTable = getTable(db, 'AppId')
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'apkfab.com', createdAt = currentTime))
 
-
+# Completed
 def malavida(db, q):
     print("Starting malavida")
     numberOfTerms = 0
@@ -455,12 +455,11 @@ def apkgk():
             title = appName[0].get_text()
             
             # Insert Into App Table
-            perAppObject = AppDetails(title, description, appID, imageSource)
+            perAppObject = (title, appID, imageSource)
             print(perAppObject)
             insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, imageSource=imageSource, description= description, websiteName='apkgk.com', createdAt=currentTime))
-            
-            finalList.append(perAppObject)
             counter=counter+1
+
         #Insert Into Main Table
         appIdTable = getTable(db, 'AppId')
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'apkgk.com', createdAt = currentTime))
