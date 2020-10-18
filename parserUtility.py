@@ -4,6 +4,9 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
+def apksupportTest():
+    print("Came inside apksupportTest")
+
 #Failing. Use user-agent fix
 def apksupport(db, q):
     print("Starting apksupport")
@@ -323,6 +326,7 @@ def allfreeapk(db, q):
         appIdTable = getTable(db, 'AppId')
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'm.allfreeapk.com', createdAt = currentTime))
 
+# Completed
 def apkfab(db, q):
     print("Starting apkfab")
     numberOfTerms = 0
@@ -362,6 +366,7 @@ def apkfab(db, q):
         appIdTable = getTable(db, 'AppId')
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'apkfab.com', createdAt = currentTime))
 
+
 def malavida(db, q):
     print("Starting malavida")
     numberOfTerms = 0
@@ -393,7 +398,6 @@ def malavida(db, q):
             title = appLink[0].get_text()
             description = appDesc[0].get_text()
             counter = counter+1
-            
             if first != 0:
                 appIDList = appIDList + ","
             appIDList = appIDList + appID
@@ -407,16 +411,16 @@ def malavida(db, q):
         appIdTable = getTable(db, 'AppId')
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'malavida.com', createdAt = currentTime))
 
-# EDITING LEFT BELOW THIS LINE
 
 def apkgk():
     numberOfTerms = 0
     while(q.empty() != True):
         word = q.get()
+        print("Starting " + word + " " + str(numberOfTerms) + " with queue length " + str(q.qsize()))
         time.sleep(1)
         payload = {'keyword': word}
-        r = requests.get('https://apkgk.com/search/', params=payload);
-        soup = BeautifulSoup(r.text, 'html.parser');
+        r = requests.get('https://apkgk.com/search/', params=payload)
+        soup = BeautifulSoup(r.text, 'html.parser')
         appId = soup.find_all("ul", attrs={"class":'topic-wrap'})
         if(len(appId) == 0):
             print("Skipping " + word)
@@ -430,32 +434,30 @@ def apkgk():
         appIDList = ""
         first = 0
         counter = 0
+        appDetailsTable = getTable(db, 'AppDetails')
+        currentTime = datetime.now()
         for name in names_table:
             appName = name.find_all("div", attrs={"class": "topic-tip-name"})
             appDesc = name.find_all("div", attrs={"class": "topic-tip-description"})
             appSrcMain  = name.find_all("div", attrs={"class": "c-lz-load"})
             imageTag = appSrcMain[0].find_all("img")
-            appLink = imageTag[0]['data-src']
+            imageSource = imageTag[0]['data-src']
             
             appID = appId[counter]['href']
             if first != 0:
                 appIDList = appIDList + ","
             appIDList = appIDList + appID
             first = 1
-            imageSource = appLink
             description = appDesc[0].get_text()
             title = appName[0].get_text()
-            starCount = "NULL"
-            developerName = "NULL"
-            perAppObject = AppDetails(title, description, starCount, appID, imageSource, developerName)
             
             # Insert Into App Table
-            taskAppTable = (appID, title, description, starCount, imageSource, developerName, 'apkgk.com');
-            insertIntoAppDetails(conn, taskAppTable)
+            perAppObject = AppDetails(title, description, appID, imageSource)
+            print(perAppObject)
+            insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, imageSource=imageSource, description= description, websiteName='apkgk.com', createdAt=currentTime))
             
             finalList.append(perAppObject)
             counter=counter+1
         #Insert Into Main Table
-        suggestionsString = "NULL"
-        taskMainTable = (word, appIDList, suggestionsString, 'apkgk.com');
-        insertIntoAppDetailsMainTable(conn, taskMainTable)
+        appIdTable = getTable(db, 'AppId')
+        insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'apkgk.com', createdAt = currentTime))

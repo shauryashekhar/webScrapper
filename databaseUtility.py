@@ -57,7 +57,9 @@ def insertIntoSugesstionsTable(table, details):
     print("insertIntoSugesstionsTable")
 
 def getStats(db):
-    statement = 'SELECT websiteName, COUNT(*) c from AppDetails GROUP BY websiteName'
-    print('The stats of AppDetails are:')
+    statement = 'SELECT websiteName, COUNT(DISTINCT appID) c from AppDetails GROUP BY websiteName'
+    print('The statistics of AppDetails are:')
     for row in db.query(statement):
-        print(row['websiteName'] + " " + row['c'])
+        websiteName = row['websiteName']
+        elementCount = row['c']
+        print("{:<20} {:<10}".format(websiteName, elementCount))

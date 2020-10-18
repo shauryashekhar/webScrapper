@@ -22,6 +22,10 @@ def countArgumentsPassed(args):
         count = count + 1
     if args.websites:
         count = count + 1
+    if args.statistics:
+        count = count + 1
+    if args.supportedWebsites:
+        count = count + 1
     return count
 
 def runAllSupportedWebsites(termsQueue):
@@ -32,20 +36,35 @@ def runAllSupportedWebsites(termsQueue):
     # apkplz(db, termsQueue)
     # apktada(db, termsQueue)
     # allfreeapk(db, termsQueue)
-    apkfab(db, termsQueue)
-    # malavida(db, termsQueue)
+    # apkfab(db, termsQueue)
+    malavida(db, termsQueue)
     # apkgk(db, termsQueue)
     print("Finished Processing for all supported websites")
 
+# dispatcher = {
+#     'apksupport': apksupportTest()
+# }
+
 def runSingleWebsite(website, termsQueue):
-    print("")
+    db = databaseStartUp()
+    try:
+        dispatcher[website](db, termsQueue)
+    except:
+        return "Invalid website name"
+    print("Came inside single website")
 
 def runWebsiteList(websites, termsQueue):
-    print("")
+    db = databaseStartUp()
+    print("Came inside run website list")
 
 def getStatistics():
     db = databaseStartUp()
     getStats(db)
+
+def listSupportedWebsites():
+    print("The following websites are currently supported!")
+    for k, v in dispatcher.items():
+        print(k)
 
 if __name__ == "__main__":
 
@@ -61,20 +80,24 @@ if __name__ == "__main__":
         print("Please choose one of the flags available (-a, -w, -ws). Run script with '-h' flag to see how to run it")
         sys.exit(0)
     elif count == 1:
-        termsQueue = readTermsAndCreateQueue()
         if args.all:
+            termsQueue = readTermsAndCreateQueue()
             print("Run for all websites")
             runAllSupportedWebsites(termsQueue)
         elif args.website:
+            termsQueue = readTermsAndCreateQueue()
             print("Running with " + args.website)
             runSingleWebsite(args.website, termsQueue)
         elif args.websites:
+            termsQueue = readTermsAndCreateQueue()
             print("Running with list of websites " + args.websites)
             runWebsiteList(args.websites, termsQueue)
         elif args.statistics:
-            print("Add function to call statistics")
+            print("Calling statistics")
+            getStatistics()
         elif args.supportedWebsites:
-            print("Add function to list supported websites")
+            print("Listing supported websites")
+            listSupportedWebsites()
     elif count == 0:
         print("No args passed. Defaulting to all websites")
         termsQueue = readTermsAndCreateQueue()
