@@ -14,6 +14,9 @@ import sys
 import dataset
 import argparse
 
+db = databaseStartUp()
+termsQueue = readTermsAndCreateQueue()
+
 def countArgumentsPassed(args):
     count = 0
     if args.all:
@@ -28,7 +31,7 @@ def countArgumentsPassed(args):
         count = count + 1
     return count
 
-def runAllSupportedWebsites(termsQueue):
+def runAllSupportedWebsites():
     db = databaseStartUp()
     # apksupport(db, termsQueue)
     # apkdl(db, termsQueue)
@@ -42,23 +45,31 @@ def runAllSupportedWebsites(termsQueue):
     print("Finished Processing for all supported websites")
 
 dispatcher = {
-    'apksupport': apksupportTest
+    'apksupport': apksupportTest,
+    'apkdl': apkdlTest,
+    'apkpure': apkpure,
+    'apkplz': apkplz,
+    'apktada': apktada,
+    'allfreeapk': allfreeapk,
+    'apkfab': apkfab,
+    'malavida': malavida,
+    'apkgk': apkgk 
 }
 
-def runSingleWebsite(website, termsQueue):
+def runSingleWebsite(website):
     print("Came inside single website")
-    db = databaseStartUp()
     try:
-        dispatcher[website]()
+        dispatcher[website](db, termsQueue)
     except:
-        return "Invalid website name"
+        print("Invalid website name passed into function ->" + website)
 
-def runWebsiteList(websites, termsQueue):
-    db = databaseStartUp()
+def runWebsiteList(websites):
     print("Came inside run website list")
+    websiteList = websites.split(",")
+    for website in websiteList:
+        runSingleWebsite(website)
 
 def getStatistics():
-    db = databaseStartUp()
     getStats(db)
 
 def listSupportedWebsites():
@@ -81,17 +92,14 @@ if __name__ == "__main__":
         sys.exit(0)
     elif count == 1:
         if args.all:
-            termsQueue = readTermsAndCreateQueue()
             print("Run for all websites from main")
-            runAllSupportedWebsites(termsQueue)
+            runAllSupportedWebsites()
         elif args.website:
-            termsQueue = readTermsAndCreateQueue()
             print("Running from main with " + args.website)
-            runSingleWebsite(args.website, termsQueue)
+            runSingleWebsite(args.website)
         elif args.websites:
-            termsQueue = readTermsAndCreateQueue()
             print("Running from main with list of websites " + args.websites)
-            runWebsiteList(args.websites, termsQueue)
+            runWebsiteList(args.websites)
         elif args.statistics:
             print("Calling statistics")
             getStatistics()
@@ -100,6 +108,5 @@ if __name__ == "__main__":
             listSupportedWebsites()
     elif count == 0:
         print("No args passed. Defaulting to all websites")
-        termsQueue = readTermsAndCreateQueue()
-        runAllSupportedWebsites(termsQueue)
+        runAllSupportedWebsites()
     sys.exit(0)

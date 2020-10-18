@@ -4,8 +4,11 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
-def apksupportTest():
+def apksupportTest(db, q):
     print("Came inside apksupportTest")
+
+def apkdlTest(db, q):
+    print("Came inside apkdlTest")
 
 #Failing. Use user-agent fix
 def apksupport(db, q):
