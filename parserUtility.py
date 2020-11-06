@@ -1,8 +1,11 @@
 from databaseUtility import *
+from utility import *
+from lxml import html
 from datetime import datetime
 import time
 import requests
 from bs4 import BeautifulSoup
+import bs4
 
 def apksupportTest(db, q):
     print("Came inside apksupportTest")
@@ -263,31 +266,36 @@ def apktada(db, q):
         soup = BeautifulSoup(r.text, 'html.parser')
         appList = soup.find_all("div", attrs={"class":"section row nop-sm"})
         appList = appList[0].find_all("div",attrs={"class":"row itemapp"})
-        finalList = []
         appIDList = ""
-        first = 0
         appDetailsTable = getTable(db, 'AppDetails')
-        currentTime = datetime.now()
-        for app in appList:
-            appDetails  = app.find_all("div",attrs={"class" : "col-md-12 col-sm-9 vcenter apptitle"}) 
-            title = appDetails[0].find_all("a")
-            title = title[0]['title']
-            imageSource = app.find_all("div",attrs={"class" : "col-md-12 col-sm-3 vcenter"}) 
-            imageSource = imageSource[0].find_all("img")
-            imageSource = imageSource[0]["data-original"]
-            appID = app.find_all("div",attrs={"class" : "col-md-12 col-sm-3 vcenter"}) 
-            appID = appID[0].find_all("a")
-            appID = appID[0]["href"]
-            if first != 0:
-                appIDList = appIDList + ","
-            appIDList = appIDList + appID
-            first = 1
-            
-            # Insert Into App Table
-            insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, imageSource=imageSource, websiteName='apktada.com', createdAt=currentTime))
+        if len(appList) == 0:
+            print('GO TO GOOGLE')
+            appIDList = googleQueryParser(appDetailsTable, 'apktada.com', word)
+        else:
+            finalList = []
+            first = 0
+            currentTime = datetime.now()
+            for app in appList:
+                appDetails  = app.find_all("div",attrs={"class" : "col-md-12 col-sm-9 vcenter apptitle"}) 
+                title = appDetails[0].find_all("a")
+                title = title[0]['title']
+                imageSource = app.find_all("div",attrs={"class" : "col-md-12 col-sm-3 vcenter"}) 
+                imageSource = imageSource[0].find_all("img")
+                imageSource = imageSource[0]["data-original"]
+                appID = app.find_all("div",attrs={"class" : "col-md-12 col-sm-3 vcenter"}) 
+                appID = appID[0].find_all("a")
+                appID = appID[0]["href"]
+                if first != 0:
+                    appIDList = appIDList + ","
+                appIDList = appIDList + appID
+                first = 1
+                
+                # Insert Into App Table
+                insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, imageSource=imageSource, websiteName='apktada.com', createdAt=currentTime))
 
         #Insert Into Main Table
         appIdTable = getTable(db, 'AppId')
+        currentTime = datetime.now()
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'apktada.com', createdAt = currentTime))
 
 # Completed
@@ -465,3 +473,46 @@ def apkgk(db, q):
         #Insert Into Main Table
         appIdTable = getTable(db, 'AppId')
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'apkgk.com', createdAt = currentTime))
+
+def googleQueryParser(appDetailsTable, websiteName, word):
+    print("Inside google search with website name as " + websiteName)
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+    googleWord = "site:" + websiteName + '+' + word
+    url = f"https://www.google.com/search?&q={googleWord}&sourceid=chrome&ie=UTF-8"
+    r = requests.get(url, headers=headers)
+    soup = BeautifulSoup(r.text, 'html.parser')
+    searchResults = soup.find_all('div', attrs={"class":'rc'})
+    appIDList = ""
+    first = 0
+    for result in searchResults:
+        searchURL = result.find('a')['href']
+        if searchURL.find(websiteName) != -1:
+            innerR = requests.get(searchURL, headers=headers)
+            siteSoup = BeautifulSoup(innerR.text, 'html.parser')
+            icon = siteSoup.find('img', attrs={"class":'section media'})
+            if hasattr(icon, 'src'):
+                imageSource = icon['src']
+                title = siteSoup.find('h1').get_text()
+                appID = ''
+                stars = ''
+                supplementaryData = ''
+                otherData = siteSoup.find('ul', attrs={"class":'list-unstyled'})
+                for data in otherData:
+                    if type(data) is not bs4.element.NavigableString:
+                        attributeName, value = extractForApkTadaWebPageViaGoogle(data.get_text())
+                        if attributeName == 'Package Name':
+                            appID = value
+                        elif attributeName == 'Stars':
+                            stars = value
+                        else:
+                            supplementaryData = supplementaryData + attributeName + ': ' + value + ', '
+                supplementaryData = supplementaryData[:-2]
+                if first != 0:
+                    appIDList = appIDList + ","
+                appIDList = appIDList + appID
+                first = 1
+                print('Extracted App')
+                currentTime = datetime.now()
+                insertIntoAppDetailsTable(appDetailsTable, dict(appID=appID, title=title, imageSource=imageSource, websiteName='apktada.com', referrer='google.com', createdAt=currentTime, stars=stars, otherData=supplementaryData))
+    print('FROM GOOGLE ' + str(len(appIDList)))
+    return appIDList

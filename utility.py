@@ -48,3 +48,25 @@ def readTermsAndCreateQueue():
         q.put(word)
     # print("Queue size is initially " + str(q.qsize()))
     return q
+
+def formatForGoogleSearch(word):
+    returnWord = ""
+    for char in word:
+        if char == '+':
+            returnWord = returnWord + ' '
+        else:
+            returnWord = returnWord + char
+    return returnWord
+
+def extractForApkTadaWebPageViaGoogle(dataRow):
+    colonIndex = dataRow.find(':')
+    if colonIndex != -1:
+        attributeName = dataRow[:colonIndex]
+        value = dataRow[colonIndex + 2:]
+        # print(attributeName + "->" + value)
+    else:
+        spaceIndex = dataRow.find(' ')
+        attributeName = 'Stars'
+        value = dataRow[spaceIndex + 1 : spaceIndex + 5]
+        # print(attributeName + "->" + value)
+    return attributeName, value
