@@ -87,8 +87,12 @@ def listSupportedWebsites():
     print("=====================================================")
     print("Please enter these keys to run the appropriate parser")
 
+# Driver function for g flag which was made for testing
 def google():
     print('TESTING PURPOSE. WILL BE REMOVED')
+    appDetailsTable = getTable(db, 'AppDetails')
+    # appIDList = googleQueryParser(appDetailsTable, 'apktada.com', 'track+my+phone+apps')
+    # apktada(db, termsQueue)
 
 if __name__ == "__main__":
 

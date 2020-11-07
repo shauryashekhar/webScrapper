@@ -259,6 +259,7 @@ def apktada(db, q):
     numberOfTerms = 0
     while(q.empty() != True):
         word = q.get()
+        # word = 'apps+to+find+cheaters'
         print("Starting " + word + " " + str(numberOfTerms) + " with queue length " + str(q.qsize()))
         time.sleep(1)
         payload = {'q': word}
@@ -297,6 +298,7 @@ def apktada(db, q):
         appIdTable = getTable(db, 'AppId')
         currentTime = datetime.now()
         insertIntoAppIdTable(appIdTable, dict(word=word, appIdList = appIDList, websiteName = 'apktada.com', createdAt = currentTime))
+        # break
 
 # Completed
 def allfreeapk(db, q):
@@ -476,18 +478,28 @@ def apkgk(db, q):
 
 def googleQueryParser(appDetailsTable, websiteName, word):
     print("Inside google search with website name as " + websiteName)
-    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36',
+        'referer': 'https://www.google.com/',
+        'accept': '*/*',
+        'accept-encoding': 'gzip, deflate, br',
+        'accept-language': 'en-US,en;q=0.9',
+        'pragma': 'no-cache',
+    }
     googleWord = "site:" + websiteName + '+' + word
     url = f"https://www.google.com/search?&q={googleWord}&sourceid=chrome&ie=UTF-8"
+    time.sleep(1)
     r = requests.get(url, headers=headers)
     soup = BeautifulSoup(r.text, 'html.parser')
+    # print(soup)
     searchResults = soup.find_all('div', attrs={"class":'rc'})
     appIDList = ""
     first = 0
     for result in searchResults:
         searchURL = result.find('a')['href']
         if searchURL.find(websiteName) != -1:
-            innerR = requests.get(searchURL, headers=headers)
+            time.sleep(1)
+            innerR = requests.get(searchURL)
             siteSoup = BeautifulSoup(innerR.text, 'html.parser')
             icon = siteSoup.find('img', attrs={"class":'section media'})
             if hasattr(icon, 'src'):
