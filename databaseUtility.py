@@ -79,3 +79,6 @@ def getRandomApps(db):
             print(innerRow['title'])
         print("==================================")
         print("==================================")
+
+def analyzeAppsInDB(db):
+    print("HERE")
