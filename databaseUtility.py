@@ -74,7 +74,7 @@ def getRandomApps(db):
         print("==================================")
         print('For websiteName = ' + websiteName)
         print("==================================")
-        queryRandomAppsPerWebiste = 'SELECT title FROM AppDetails where websiteName = "{0}" ORDER BY RANDOM() LIMIT 20'.format(websiteName)
+        queryRandomAppsPerWebiste = 'SELECT DISTINCT title FROM AppDetails where websiteName = "{0}" ORDER BY RANDOM() LIMIT 20'.format(websiteName)
         for innerRow in db.query(queryRandomAppsPerWebiste):
             print(innerRow['title'])
         print("==================================")
