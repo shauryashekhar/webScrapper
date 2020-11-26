@@ -32,6 +32,8 @@ def countArgumentsPassed(args):
         count = count + 1
     if args.google:
         count = count + 1
+    if args.random:
+        count = count + 1
     return count
 
 dispatcher = {
@@ -87,6 +89,11 @@ def listSupportedWebsites():
     print("=====================================================")
     print("Please enter these keys to run the appropriate parser")
 
+def randomAppsPerWebsite():
+    print("===The following random apps are returned per website!===")
+    getRandomApps(db)
+
+
 # Driver function for g flag which was made for testing
 def google():
     print('TESTING PURPOSE. WILL BE REMOVED')
@@ -103,6 +110,7 @@ if __name__ == "__main__":
     parser.add_argument("-s", "--statistics", help="get statistics", action="store_true")
     parser.add_argument("-sw", "--supportedWebsites", help="list supported websites", action="store_true")
     parser.add_argument("-g", "--google", help="google search", action="store_true")
+    parser.add_argument("-r", "--random", help="get 20 random results per website", action="store_true")
     args = parser.parse_args()
     count = countArgumentsPassed(args)
     if count > 1:
@@ -127,6 +135,9 @@ if __name__ == "__main__":
         elif args.google:
             print("Google Search!")
             google()
+        elif args.random:
+            print("Getting 20 random apps per website")
+            randomAppsPerWebsite()
     elif count == 0:
         print("No args passed. Defaulting to all websites")
         runAllSupportedWebsites()

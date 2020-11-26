@@ -488,7 +488,7 @@ def googleQueryParser(appDetailsTable, websiteName, word):
     }
     googleWord = "site:" + websiteName + '+' + word
     url = f"https://www.google.com/search?&q={googleWord}&sourceid=chrome&ie=UTF-8"
-    time.sleep(1)
+    time.sleep(2)
     r = requests.get(url, headers=headers)
     soup = BeautifulSoup(r.text, 'html.parser')
     # print(soup)
@@ -497,7 +497,7 @@ def googleQueryParser(appDetailsTable, websiteName, word):
     first = 0
     for result in searchResults:
         searchURL = result.find('a')['href']
-        if searchURL.find(websiteName) != -1:
+        if searchURL.find(websiteName) != -1 and searchURL.find('/app/') != -1:
             time.sleep(1)
             innerR = requests.get(searchURL)
             siteSoup = BeautifulSoup(innerR.text, 'html.parser')

@@ -66,3 +66,16 @@ def getStats(db):
         websiteName = row['websiteName']
         elementCount = row['c']
         print("{:<20} {:<10}".format(websiteName, elementCount))
+
+def getRandomApps(db):
+    queryListOfWebsites = 'SELECT DISTINCT websiteName from AppDetails'
+    for row in db.query(queryListOfWebsites):
+        websiteName = row['websiteName']
+        print("==================================")
+        print('For websiteName = ' + websiteName)
+        print("==================================")
+        queryRandomAppsPerWebiste = 'SELECT title FROM AppDetails where websiteName = "{0}" ORDER BY RANDOM() LIMIT 20'.format(websiteName)
+        for innerRow in db.query(queryRandomAppsPerWebiste):
+            print(innerRow['title'])
+        print("==================================")
+        print("==================================")
