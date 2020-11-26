@@ -82,3 +82,8 @@ def getRandomApps(db):
 
 def analyzeAppsInDB(db):
     print("HERE")
+    getAllDistinctAppsQuery = 'SELECT DISTINCT appID, websiteName from AppDetails'
+    for row in db.query(getAllDistinctAppsQuery):
+        appID = row['appID']
+        websiteName = row['websiteName']
+        
