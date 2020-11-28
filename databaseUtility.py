@@ -1,6 +1,6 @@
 import dataset
 from sqlalchemy.sql import text
-
+from collections import defaultdict
 
 def databaseStartUp():
     db = dataset.connect("sqlite:///database.db")
@@ -81,9 +81,45 @@ def getRandomApps(db):
         print("==================================")
 
 def analyzeAppsInDB(db):
-    print("HERE")
+    appDict = defaultdict(set)
     getAllDistinctAppsQuery = 'SELECT DISTINCT appID, websiteName from AppDetails'
     for row in db.query(getAllDistinctAppsQuery):
         appID = row['appID']
         websiteName = row['websiteName']
+        if websiteName == 'apk-dl.com':
+            slashPos = appID.rfind('/')
+            appID = appID[slashPos+1:]
+        elif websiteName == 'apkpure.com':
+            slashPos = appID.rfind('/')
+            appID = appID[slashPos+1:]
+        elif websiteName == 'apkplz.com':
+            slashPos = appID.rfind('/')
+            appID = appID[slashPos+1:]
+        elif websiteName == 'apktada.com':
+            slashPos = appID.rfind('/')
+            appID = appID[slashPos+1:]
+        elif websiteName == 'm.allfreeapk.com':
+            appID = appID[:-1]
+            slashPos = appID.rfind('/')
+            appID = appID[slashPos + 1:]
+        elif websiteName == 'apkfab.com':
+            slashPos = appID.rfind('/')
+            appID = appID[slashPos + 1:]
+        elif websiteName == 'malavida.com':
+            appID = appID[:-1]
+            slashPos = appID.rfind('/')
+            appID = appID[slashPos + 1:]
+        elif websiteName == 'apkgk.com':
+            appID = appID[1:]
+        
+        appDict[appID].add(websiteName)
+    
+    countArray = [0,0,0,0,0,0,0,0,0]
+    for key in appDict:
+        valueSize = len(appDict[key])
+        countArray[valueSize] = countArray[valueSize] + 1
+    for i in range(9):
+        perc = countArray[i] / len(appDict) * 100
+        if i != 0:
+            print('The percentage of apps found in '+ str(i) +' websites is '+ str(perc) + ' %.')
         
