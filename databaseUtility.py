@@ -86,26 +86,10 @@ def analyzeAppsInDB(db):
     for row in db.query(getAllDistinctAppsQuery):
         appID = row['appID']
         websiteName = row['websiteName']
-        if websiteName == 'apk-dl.com':
+        if websiteName == 'apk-dl.com' or websiteName == 'apkpure.com' or websiteName == 'apkplz.com' or websiteName == 'apktada.com' or websiteName == 'apkfab.com':
             slashPos = appID.rfind('/')
             appID = appID[slashPos+1:]
-        elif websiteName == 'apkpure.com':
-            slashPos = appID.rfind('/')
-            appID = appID[slashPos+1:]
-        elif websiteName == 'apkplz.com':
-            slashPos = appID.rfind('/')
-            appID = appID[slashPos+1:]
-        elif websiteName == 'apktada.com':
-            slashPos = appID.rfind('/')
-            appID = appID[slashPos+1:]
-        elif websiteName == 'm.allfreeapk.com':
-            appID = appID[:-1]
-            slashPos = appID.rfind('/')
-            appID = appID[slashPos + 1:]
-        elif websiteName == 'apkfab.com':
-            slashPos = appID.rfind('/')
-            appID = appID[slashPos + 1:]
-        elif websiteName == 'malavida.com':
+        elif websiteName == 'm.allfreeapk.com' or websiteName == 'malavida.com':
             appID = appID[:-1]
             slashPos = appID.rfind('/')
             appID = appID[slashPos + 1:]
