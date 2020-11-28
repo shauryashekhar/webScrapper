@@ -105,5 +105,5 @@ def analyzeAppsInDB(db):
     for i in range(9):
         perc = countArray[i] / len(appDict) * 100
         if i != 0:
-            print('The percentage of apps found in '+ str(i) +' websites is '+ str(perc) + ' %.')
+            print('The percentage of apps found in '+ str(i) +' websites is '+ str(perc) + ' % which is a total of ' + str(countArray[i]) + ' applications.')
         
